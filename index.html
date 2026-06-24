@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<body>
+    <h1>ベースキャンプ・タイトル</h1>
+    <button id="startBtn">接続して開始</button>
+    <p id="msg"></p>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+        
+        apiKey: "AIzaSyCJ5h0o9RdNf19wJYXQRzd7rfJDazeRmwc",
+        authDomain: "merodigear.firebaseapp.com",
+        projectId: "merodigear",
+        storageBucket: "merodigear.firebasestorage.app",
+        messagingSenderId: "863493263922",
+        appId: "1:863493263922:web:637be57f738317b2a0622b",
+        measurementId: "G-34K1QLXL4S"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        document.getElementById('startBtn').onclick = async () => {
+            const msg = document.getElementById('msg');
+            msg.innerText = "接続中...";
+
+            // Firebaseの「room1/host」を見に行く
+            const hostRef = database.ref('room1/host');
+            const snapshot = await hostRef.once('value');
+
+            if (!snapshot.exists()) {
+                // ホストがいないので自分がホストになる
+                await hostRef.set('active');
+                msg.innerText = "あなたはホスト(1)として接続しました";
+            } else {
+                // ホストがいるのでゲストになる
+                msg.innerText = "あなたはゲスト(2)として接続しました";
+            }
+        };
+    </script>
+</body>
+</html>
+
+
+
+
