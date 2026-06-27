@@ -1,0 +1,9 @@
+[
+  {
+    "postId": "001",
+    "owner": { "avatarName": "テストパイロット", "avatarIcon": "" },
+    "robot": { "name": "試作機A", "level": 5, "atk": 100 },
+    "bgmInfo": { "title": "最初の旋律", "composer": "自分" },
+    "timestamp": "2026-06-27T16:00:00Z"
+  }
+]
